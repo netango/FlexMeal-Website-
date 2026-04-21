@@ -88,6 +88,7 @@ body {
 }
 
 .logo { height: 34px; width: auto; }
+.nav-icon { height: 38px; width: 38px; object-fit: cover; border-radius: 22%; }
 
 .nav-link {
   color: var(--stone);
@@ -109,8 +110,7 @@ body {
 
 /* ── Hero ── */
 .hero {
-  padding: 140px 0 100px;
-  min-height: 100vh;
+  padding: 108px 0 72px;
   display: flex;
   align-items: center;
   position: relative;
@@ -148,7 +148,7 @@ body {
 .hero-inner {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 56px;
+  gap: 40px;
   align-items: center;
   position: relative;
   z-index: 1;
@@ -167,7 +167,7 @@ body {
   border: 1px solid rgba(28, 59, 42, 0.15);
   padding: 6px 14px;
   border-radius: 100px;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   opacity: 0;
   animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
@@ -189,12 +189,12 @@ body {
 /* Hero title */
 .hero-title {
   font-family: 'Fraunces', serif;
-  font-size: clamp(3.4rem, 7.5vw, 6rem);
+  font-size: clamp(2.8rem, 6vw, 5rem);
   font-weight: 850;
   line-height: 0.98;
   letter-spacing: -0.035em;
   color: var(--ink);
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   opacity: 0;
   animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
 }
@@ -219,11 +219,11 @@ body {
 }
 
 .hero-subtitle {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--stone);
-  margin-bottom: 40px;
+  margin-bottom: 28px;
   max-width: 400px;
-  line-height: 1.7;
+  line-height: 1.65;
   opacity: 0;
   animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
 }
@@ -385,7 +385,7 @@ body {
 
 /* ── How It Works ── */
 .how-it-works {
-  padding: 100px 0 90px;
+  padding: 72px 0 64px;
   background: var(--parchment);
   position: relative;
 }
@@ -407,8 +407,8 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 64px;
+  gap: 20px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
 }
 
@@ -487,7 +487,7 @@ body {
   background: var(--cream);
   border: 1px solid var(--border);
   border-radius: 22px;
-  padding: 36px 28px 32px;
+  padding: 26px 22px 22px;
   transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease;
 }
 
@@ -645,57 +645,41 @@ body {
 /* ── CTA ── */
 .cta {
   background: var(--forest);
-  padding: 110px 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-glow {
-  position: absolute;
-  top: -30%;
-  right: -5%;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(ellipse, rgba(107, 148, 119, 0.14) 0%, transparent 60%);
-  pointer-events: none;
+  padding: 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
 }
 
 .cta-inner {
-  text-align: center;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
 }
 
-.cta-title {
+.cta-label {
   font-family: 'Fraunces', serif;
-  font-size: clamp(2.6rem, 6vw, 4.2rem);
-  font-weight: 750;
-  letter-spacing: -0.03em;
-  color: var(--cream);
-  margin-bottom: 18px;
-  line-height: 1.05;
-}
-
-.cta-title em {
   font-style: italic;
-  color: var(--saffron);
+  font-size: 1rem;
+  color: rgba(245, 240, 232, 0.7);
+  white-space: nowrap;
 }
 
-.cta-subtitle {
-  font-size: 1.05rem;
-  color: rgba(245, 240, 232, 0.6);
-  margin-bottom: 44px;
-  max-width: 480px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.7;
+.cta .download-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.cta .download-buttons { justify-content: center; }
+.cta .store-btn {
+  padding: 10px 18px;
+}
 
 .cta .app-store {
   background: var(--cream);
   color: var(--forest);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
 .cta .google-play {
@@ -768,25 +752,24 @@ body {
 @media (max-width: 900px) {
   .steps.active {
     grid-template-columns: 1fr;
-    max-width: 440px;
+    max-width: 420px;
     margin: 0 auto;
-    gap: 16px;
+    gap: 12px;
   }
 
   .step-connector { display: none; }
 
-  .hiw-header { align-items: flex-start; flex-direction: column; }
+  .hiw-header { align-items: flex-start; flex-direction: column; gap: 14px; }
 }
 
 @media (max-width: 768px) {
   .hero {
-    padding: 112px 0 72px;
-    min-height: auto;
+    padding: 90px 0 56px;
   }
 
   .hero-inner {
     grid-template-columns: 1fr;
-    gap: 52px;
+    gap: 36px;
     text-align: center;
   }
 
@@ -797,9 +780,13 @@ body {
 
   .hero-visual { order: -1; }
 
-  .phone-frame { width: 230px; transform: rotate(1deg); }
+  .phone-frame { width: 220px; transform: rotate(1deg); }
 
   .hero-dots { display: none; }
+
+  .how-it-works { padding: 56px 0 48px; }
+
+  .cta-inner { gap: 16px; }
 
   .footer-inner {
     flex-direction: column;
@@ -809,8 +796,30 @@ body {
 }
 
 @media (max-width: 480px) {
-  .hero-title  { font-size: 3rem; }
-  .phone-frame { width: 200px; }
-  .store-btn   { padding: 11px 18px; }
+  .hero-title  { font-size: 2.6rem; }
+  .phone-frame { width: 190px; }
+
+  .download-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .store-btn {
+    padding: 13px 20px;
+    justify-content: center;
+  }
+
   .store-btn-large { font-size: 0.95rem; }
+
+  .step { padding: 20px 18px; }
+
+  .step-num { font-size: 2.2rem; }
+
+  .step-icon { width: 44px; height: 44px; }
+
+  .tabs { width: 100%; }
+  .tab  { flex: 1; padding: 9px 14px; font-size: 0.82rem; }
+
+  .hiw-header { margin-bottom: 28px; }
 }
