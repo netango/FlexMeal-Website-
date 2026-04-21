@@ -1,6 +1,13 @@
+// ── Nav scroll state ──
+const nav = document.getElementById('nav');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
 // ── Hero Carousel ──
 const slides = document.querySelectorAll('.carousel-slide');
-const dots = document.querySelectorAll('.dot');
+const dots   = document.querySelectorAll('.dot');
 let current = 0;
 let autoplayTimer;
 
@@ -21,62 +28,53 @@ function resetAutoplay() {
   startAutoplay();
 }
 
-// Dot navigation
 dots.forEach((dot, i) => {
-  dot.addEventListener('click', () => {
-    goToSlide(i);
-    resetAutoplay();
-  });
+  dot.addEventListener('click', () => { goToSlide(i); resetAutoplay(); });
 });
 
-// Swipe support
+// Touch/drag on phone frame
 const track = document.querySelector('.carousel-track');
 let startX = 0;
 let isDragging = false;
 
-track.addEventListener('touchstart', (e) => {
+track.addEventListener('touchstart', e => {
   startX = e.touches[0].clientX;
   isDragging = true;
 }, { passive: true });
 
-track.addEventListener('touchend', (e) => {
+track.addEventListener('touchend', e => {
   if (!isDragging) return;
   isDragging = false;
   const diff = startX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 50) {
-    goToSlide(diff > 0 ? current + 1 : current - 1);
-    resetAutoplay();
-  }
+  if (Math.abs(diff) > 44) { goToSlide(diff > 0 ? current + 1 : current - 1); resetAutoplay(); }
 });
 
-// Mouse drag support
-track.addEventListener('mousedown', (e) => {
+track.addEventListener('mousedown', e => {
   startX = e.clientX;
   isDragging = true;
   track.style.cursor = 'grabbing';
 });
 
-document.addEventListener('mouseup', (e) => {
+document.addEventListener('mouseup', e => {
   if (!isDragging) return;
   isDragging = false;
   track.style.cursor = '';
   const diff = startX - e.clientX;
-  if (Math.abs(diff) > 50) {
-    goToSlide(diff > 0 ? current + 1 : current - 1);
-    resetAutoplay();
-  }
+  if (Math.abs(diff) > 44) { goToSlide(diff > 0 ? current + 1 : current - 1); resetAutoplay(); }
 });
 
-// Pause autoplay on hover
-track.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
-track.addEventListener('mouseleave', () => startAutoplay());
+const phoneFrame = document.getElementById('phoneFrame');
+if (phoneFrame) {
+  phoneFrame.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+  phoneFrame.addEventListener('mouseleave', () => startAutoplay());
+}
 
 startAutoplay();
 
 // ── Tabs ──
-const tabs = document.querySelectorAll('.tab');
+const tabs         = document.querySelectorAll('.tab');
 const customerSteps = document.querySelector('.customer-steps');
-const chefSteps = document.querySelector('.chef-steps');
+const chefSteps     = document.querySelector('.chef-steps');
 
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
@@ -93,9 +91,26 @@ tabs.forEach(tab => {
   });
 });
 
-// ── Smooth scroll for nav links ──
+// ── Scroll Reveal ──
+// Apply data-delay as transition-delay
+document.querySelectorAll('[data-delay]').forEach(el => {
+  el.style.transitionDelay = el.dataset.delay;
+});
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ── Smooth scroll for hash links ──
 document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', (e) => {
+  link.addEventListener('click', e => {
     const target = document.querySelector(link.getAttribute('href'));
     if (target) {
       e.preventDefault();
